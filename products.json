@@ -38,14 +38,14 @@
     "id": 6,
     "name": "Chakri (10 pieces)",
     "price": 200,
-    "image": "chakri.jpg ",
+    "image": "chakri.jpg",
     "description": "Pack of 10 spinning chakris."
   },
   {
     "id": 7,
     "name": "Seeta Geeta Anar Bomb (5 pieces)",
     "price": 200,
-    "image": "seeta_geeta_anar.jpeg",
+    "image": "seeta_geeta_anar.jpg",
     "description": "Set of 5 Seeta Geeta Anar bomb."
   },
   {
