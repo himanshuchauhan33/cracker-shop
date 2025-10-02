@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cracker Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">Cracker Shop</h1>
+      <nav>
+        <a href="{{ url_for('cart') }}">Cart</a>
+        <a href="{{ url_for('admin') }}">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Products</h2>
+    <div class="products">
+      {% for p in products %}
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/' + p['image']) }}" alt="{{ p['name'] }}"width="200" height="150">
+        <h3>{{ p['name'] }}</h3>
+        <p class="desc">{{ p['description'] }}</p>
+        <p class="price">₹{{ p['price'] }}</p>
+        <a href="{{ url_for('add_to_cart', pid=p['id']) }}" class="btn">Add to cart</a>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <footer class="container">
+    <p>© 2025 Cracker Shop</p>
+  </footer>
+</body>
+</html>

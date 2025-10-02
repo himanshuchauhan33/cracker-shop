@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "name": "Nazi (10 pieces)",
+    "price": 250,
+    "image": "nazi.jpg",
+    "description": "Pack of 10 small crackers."
+  },
+  {
+    "id": 2,
+    "name": "Big Anar (10 pieces)",
+    "price": 300,
+    "image": "big_anar.jpg",
+    "description": "Big Anar pack of 10 for vibrant fountains."
+  },
+  {
+    "id": 3,
+    "name": "Small Anar (10 pieces)",
+    "price": 200,
+    "image": "small_anar.jpg",
+    "description": "Small Anar pack of 10."
+  },
+  {
+    "id": 4,
+    "name": "Big Fuljhadi (5 pieces, 30 cm)",
+    "price": 100,
+    "image": "big_fuljhadi.jpg",
+    "description": "Set of 5 big fuljhadi (30 cm) sparklers."
+  },
+  {
+    "id": 5,
+    "name": "Small Fuljhadi (10 pieces, 15 cm)",
+    "price": 100,
+    "image": "small_fuljhadi.jpg",
+    "description": "Pack of 10 small fuljhadi (15 cm)."
+  },
+  {
+    "id": 6,
+    "name": "Chakri (10 pieces)",
+    "price": 200,
+    "image": "chakri.jpg ",
+    "description": "Pack of 10 spinning chakris."
+  },
+  {
+    "id": 7,
+    "name": "Seeta Geeta Anar Bomb (5 pieces)",
+    "price": 200,
+    "image": "seeta_geeta_anar.jpeg",
+    "description": "Set of 5 Seeta Geeta Anar bomb."
+  },
+  {
+    "id": 8,
+    "name": "Mini Bullet Bomb (10 pieces)",
+    "price": 40,
+    "image": "mini_bullet.jpg",
+    "description": "Pack of 10 mini bullet bombs."
+  },
+  {
+    "id": 9,
+    "name": "Chatar Patar (Dragon fight) (10 pieces)",
+    "price": 50,
+    "image": "chatar_patar.jpg",
+    "description": "10 pieces dragon fight chatar patar."
+  },
+  {
+    "id": 10,
+    "name": "Murga Chap (1 packet)",
+    "price": 25,
+    "image": "murga_chap.jpg",
+    "description": "1 packet of murga chap crackers."
+  },
+  {
+    "id": 11,
+    "name": "Bijli Bomb (1 packet)",
+    "price": 50,
+    "image": "bijli_bomb.jpg",
+    "description": "1 packet bijli bombs."
+  }
+]
