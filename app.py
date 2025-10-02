@@ -273,6 +273,13 @@ def send_order_email(to_email, customer_name, order_id, items, total, delivery_t
     except Exception as e:
         print("Email send failed:", e)
         return False
+        
+@app.context_processor
+def inject_globals():
+    return dict(
+        STRIPE_PUBLISHABLE=STRIPE_PUBLISHABLE,
+        WHATSAPP_NUMBER=os.getenv("WHATSAPP_NUMBER", "91XXXXXXXXXX")  # fallback number
+    )
 
 
 # ----------------- Run App -----------------
