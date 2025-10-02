@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Order Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .search-box { margin: 20px 0; padding: 10px; }
+        .paid { color: green; font-weight: bold; }
+        .unpaid { color: red; }
+        .login-form { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Order Management</h1>
+    
+    {% if denied %}
+        {% if not request.args.get('p') %}
+        <!-- Login Form -->
+        <div class="login-form">
+            <h2>Admin Login</h2>
+            <form method="GET">
+                <input type="password" name="p" placeholder="Enter Admin Password" required style="width: 100%; padding: 10px; margin: 10px 0;">
+                <button type="submit" style="width: 100%; padding: 10px; background: #004080; color: white; border: none;">Login</button>
+            </form>
+        </div>
+        {% else %}
+        <p style="color: red;">Access Denied - Invalid Password</p>
+        {% endif %}
+    {% else %}
+        <!-- Search Box -->
+        <div class="search-box">
+            <form method="GET">
+                <input type="hidden" name="p" value="{{ request.args.get('p') }}">
+                <input type="text" name="search" placeholder="Search by name, email, or phone" value="{{ request.args.get('search', '') }}">
+                <button type="submit">Search</button>
+                <a href="{{ url_for('admin', p=request.args.get('p')) }}">Clear</a>
+            </form>
+        </div>
+
+        {% if orders %}
+            <p>Total Orders: {{ orders|length }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Delivery Type</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.customer_name }}</td>
+                        <td>{{ order.email or 'N/A' }}</td>
+                        <td>{{ order.phone }}</td>
+                        <td>{{ order.address or 'N/A' }}</td>
+                        <td>{{ order.delivery_type }}</td>
+                        <td>
+                            {% if order.items and order.items is iterable %}
+                                <ul style="margin: 0; padding-left: 15px;">
+                                {% for item in order.items %}
+                                    <li>{{ item.name }} x{{ item.qty }} - ₹{{ item.price * item.qty }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                No items
+                            {% endif %}
+                        </td>
+                        <td>₹{{ order.total }}</td>
+                        <td class="{% if order.paid %}paid{% else %}unpaid{% endif %}">
+                            {{ 'Paid' if order.paid else 'Unpaid' }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+        
+        <br>
+        <div>
+            <a href="{{ url_for('admin', p=request.args.get('p')) }}">Refresh Orders</a> | 
+            <a href="{{ url_for('index') }}">Back to Shop</a>
+        </div>
+    {% endif %}
+</body>
+</html>

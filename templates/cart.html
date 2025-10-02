@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <h1 class="brand">Cracker Shop</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('checkout') }}">Checkout</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h2>Your Cart</h2>
+  {% if items %}
+  <form method="post" action="{{ url_for('update_cart') }}">
+    <table class="cart-table">
+      <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th></tr></thead>
+      <tbody>
+        {% for it in items %}
+        <tr>
+          <td>{{ it.name }}</td>
+          <td>₹{{ it.price }}</td>
+          <td><input type="number" name="qty-{{ it.id }}" value="{{ it.qty }}" min="0"></td>
+          <td>₹{{ it.subtotal }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="total">Total: ₹{{ total }}</p>
+    <button type="submit" class="btn">Update Cart</button>
+    <a href="{{ url_for('checkout') }}" class="btn primary">Proceed to Checkout</a>
+  </form>
+  {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('index') }}">Shop now</a></p>
+  {% endif %}
+</main>
+
+<footer class="container"><p>© 2025 Cracker Shop</p></footer>
+</body>
+</html>

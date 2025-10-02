@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - Cracker Shop</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, textarea, select { display: block; margin: 10px 0; padding: 8px; width: 300px; }
+        .warning { background: #fff3cd; color: #856404; padding: 10px; border: 1px solid #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>💰 Checkout</h1>
+    
+    <h3>Order Summary:</h3>
+    {% for item in items %}
+    <p>{{ item.name }} x {{ item.qty }} = ₹{{ item.price * item.qty }}</p>
+    {% endfor %}
+    <h3>Total: ₹{{ total }}</h3>
+    
+    {% if not STRIPE_PUBLISHABLE or not STRIPE_PUBLISHABLE.startswith('pk_test_') %}
+    <div class="warning">
+        ⚠️ Online payments are currently unavailable. Please use Cash on Delivery.
+    </div>
+    {% endif %}
+    
+    <form method="POST">
+        <h3>Customer Information</h3>
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email">
+        <input type="tel" name="phone" placeholder="Phone" required>
+        <textarea name="address" placeholder="Address"></textarea>
+        
+        <select name="delivery_type">
+            <option value="home">Home Delivery</option>
+            <option value="pickup">Store Pickup</option>
+        </select>
+        
+        <h3>Payment Method</h3>
+        <label><input type="radio" name="pay_method" value="cod" checked> Cash on Delivery</label>
+        
+        {% if STRIPE_PUBLISHABLE and STRIPE_PUBLISHABLE.startswith('pk_test_') %}
+        <label><input type="radio" name="pay_method" value="stripe"> Credit/Debit Card</label>
+        {% else %}
+        <div class="warning">
+            Credit/Debit Card payments temporarily unavailable
+        </div>
+        {% endif %}
+        
+        <br><br>
+        <button type="submit">Place Order</button>
+    </form>
+</body>
+</html>
